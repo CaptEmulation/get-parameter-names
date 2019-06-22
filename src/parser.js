@@ -1,4 +1,3 @@
-import 'regenerator-runtime/runtime';
 import debugFactory from 'debug';
 const debug = debugFactory('getParameterNames');
 
