@@ -6,7 +6,7 @@
     "Benjamin Botto <benjamin.botto@gmail.com>",
     "german <german@gametube.org>"
   ],
-  "version": "1.4.0",
+  "version": "1.4.1",
   "types": "dist/index.d.ts",
   "description": "Retrieves parameter names from a function",
   "license": "MIT",
