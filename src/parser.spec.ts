@@ -1,18 +1,18 @@
-import arg from '../src';
+import arg from '.';
 import chai from 'chai';
 
 const { expect } = chai;
 
 describe('function tests', function () {
   it('test1', function () {
-    function /* (no parenthesis like this) */ test1(a, b, c){
+    function /* (no parenthesis like this) */ test1(a: any, b: any, c: any){
       return true
     }
     expect(arg(test1)).to.deep.equal(['a', 'b', 'c']);
   });
 
   it('test2', function () {
-    function test2(a, b, c) /*(why do people do this??)*/{
+    function test2(a: any, b: any, c: any) /*(why do people do this??)*/{
       return true
     }
 
@@ -20,7 +20,7 @@ describe('function tests', function () {
   });
 
   it('test3', function () {
-    function test3(a, /* (jewiofewjf,wo, ewoi, werp)*/ b, c) {
+    function test3(a: any, /* (jewiofewjf,wo, ewoi, werp)*/ b: any, c: any) {
       return true
     }
 
@@ -28,8 +28,8 @@ describe('function tests', function () {
   });
 
   it('test4', function () {
-    function test4(a/* a*/, /* b */b, /*c*/c,d/*d*/) {
-      return function (one, two, three) {
+    function test4(a/* a*/: any, /* b */b: any, /*c*/c: any,d/*d*/: any) {
+      return function (one: any, two: any, three: any) {
       }
     }
 
@@ -38,9 +38,9 @@ describe('function tests', function () {
 
   it('test5', function () {
     function test5(
-      a,
-      b,
-      c
+      a: any,
+      b: any,
+      c: any
     ) {
       return false;
     }
@@ -49,7 +49,7 @@ describe('function tests', function () {
   });
 
   it('test6', function () {
-    function test6(a) { return function f6(a, b) { } }
+    function test6(a: any) { return function f6(a: any, b: any) { } }
 
     expect(arg(test6)).to.deep.equal(['a']);
   });
@@ -79,20 +79,20 @@ describe('function tests', function () {
        return false;
      }
      */
-    a,b,c) { return true }
+    a: any,b: any,c: any) { return true }
 
     expect(arg(test7)).to.deep.equal(['a', 'b', 'c']);
   });
 
   it('test8', function () {
     function                                               test8
-                               (a,b,c){}
+                               (a: any,b: any,c: any){}
 
     expect(arg(test8)).to.deep.equal(['a', 'b', 'c']);
   });
 
   it('test9', function () {
-    function π9(ƒ, µ) { (a + 2 + b + 2 + c) }
+    function π9(ƒ: any, µ: any) {  }
 
     expect(arg(π9)).to.deep.equal(['ƒ', 'µ']);
   });
@@ -240,9 +240,10 @@ describe('function tests', function () {
 
     it('static get before constructor', function () {
       class Cat {
-        static get name() {
+        static get fido() {
           return 'fido';
         }
+        constructor() {}
       }
       expect(arg(Cat)).to.deep.equal([]);
     })
@@ -256,8 +257,8 @@ describe('function tests', function () {
 
     it('class with static get after constructor', function () {
       class Cat {
-        constructor(a, b) { }
-        static get name() {
+        constructor(a: string, b: string) { }
+        static get fido() {
           return 'fido';
         }
       }
@@ -269,7 +270,7 @@ describe('function tests', function () {
         constructor() { }
       }
       class Cat extends Animal {
-        constructor(a, b) {
+        constructor(a: string, b: string) {
           super();
           expect(arg(this.constructor)).to.deep.equal(['a', 'b']);
         }

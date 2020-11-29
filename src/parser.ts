@@ -9,9 +9,9 @@ const ES6_STATIC = /static.*$/mg;
 
 const nonVarChars = ['=', '(', ')', ','];
 
-function *matchNexter(string) {
+function *matchNexter(string: string) {
   debug(`Chopping ${string}`);
-  function updateIndex(stringIndex) {
+  function updateIndex(stringIndex: number) {
     debug(`Updating index starting at: ${stringIndex}`);
     return indexes.map((foundAt, i)  => {
       if (foundAt === stringIndex) {
@@ -57,15 +57,14 @@ function *matchNexter(string) {
   }
 }
 
-export default function parse(string) {
-  const gen = matchNexter(string
+export default function parse(input: Function|string) {
+  const gen = matchNexter(input
     .toString()
     .replace(ES6_STATIC, '')
     .replace(NEW_LINES, '')
     .replace(COMMENTS, '')
     .replace(ASYNC, '')
-    .replace(SPACES, '')
-  );
+    .replace(SPACES, ''));
 
   let next = gen.next();
   let value = next.value;
